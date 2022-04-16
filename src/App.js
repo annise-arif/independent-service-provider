@@ -1,15 +1,18 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import Header from './pages/Header/Header';
-import NavBar from './pages/Header/NavBar/NavBar';
+import About from './pages/About/About';
+import Home from './pages/Home/Home/Home';
+import Header from './pages/Shared/Header/Header';
 
 function App() {
   return (
     <div className="App">
-    <NavBar></NavBar>
     <Header></Header>
     <Routes>
-      <Route to='/home' element={}></Route>
+      <Route path='/' element={<Home></Home>}></Route>
+      <Route path='/home' element={<Home></Home>}></Route>
+      <Route path='/about' element={<About></About>}></Route>
+
     </Routes>
        
     </div>
