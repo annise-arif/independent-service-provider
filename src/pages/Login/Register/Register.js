@@ -1,36 +1,60 @@
 import React, { useRef } from "react";
 import { Button, Form } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
+import auth from "../../../firebase.init";
+import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
+import SocialLogin from "../SocialLogin/SocialLogin";
 
 const Register = () => {
+  const emailRef = useRef('');
+  const passwordRef = useRef('');
   const navigate = useNavigate();
-  const nameRef = useRef("");
-  const emailRef = useRef("");
-  const passwordRef = useRef("");
 
-  const handleForm = (event) => {
+  let errorElement;
+  const [
+    createUserWithEmailAndPassword,
+    user,
+    loading,
+    error,
+  ] = useCreateUserWithEmailAndPassword(auth);
+  // {sendEmailVerification: true}
+
+  if(error){
+    errorElement = <p className='text-danger'> Error: {error?.message}</p>  
+  }
+
+  if(user){
+    navigate('/services');
+  }
+
+  const handleRegisterForm = (event) => {
     event.preventDefault();
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
-
+    if(email && password){
+      createUserWithEmailAndPassword(email, password);
+    }
     console.log(email, password);
   };
 
-  const navigateLogin = (event) => {
+  const navigateLogin = () => {
     navigate("/login");
   };
   return (
     <div>
       <div className="container w-25 mx-auto border p-5 mt-4 rounded-3">
         <h3 className="text-center text-info pb-4">Please Register</h3>
-        <Form onClick={handleForm}>
+        <Form onClick={handleRegisterForm}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Control ref={nameRef} type="text" placeholder="Enter Name" />
+            <Form.Control 
+            type="name" 
+            placeholder="Enter Name" 
+            />
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Control
-              ref={emailRef}
+            ref={emailRef}
               type="email"
               placeholder="Enter email"
             />
@@ -38,7 +62,7 @@ const Register = () => {
 
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Control
-              ref={passwordRef}
+            ref={passwordRef}
               type="password"
               placeholder="Password"
             />
@@ -46,9 +70,10 @@ const Register = () => {
           <Button variant="primary" type="submit">
             Sign Up
           </Button>
+          <p><small>{errorElement}</small></p>
         </Form>
         <p className="mt-4">
-          Already have an account?{" "}
+          Already have an account?
           <Link
             to="/login"
             className="text-primary text-decoration-none"
@@ -57,6 +82,7 @@ const Register = () => {
             Please Login
           </Link>
         </p>
+        <SocialLogin></SocialLogin>
       </div>
     </div>
   );
