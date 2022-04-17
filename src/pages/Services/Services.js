@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import Hooks from '../../Hooks/Hooks';
-import Service from '../Service/Service';
-import './Services.css';
+import React from 'react';
+import Service from '../Home/Service/Service';
+import Hooks from '../Hooks/Hooks';
 
 const Services = () => {
     const [services, setServices] = Hooks();
@@ -10,7 +9,7 @@ const Services = () => {
         <h3 className='text-center text-primary mt-5 py-3'>Our Services</h3>
            <div className='services-container'>
            {
-                services.slice(0, 6).map( service => <Service 
+                services.map( service => <Service 
                 key={service.id} 
                 service={service}
                 ></Service>)
