@@ -5,10 +5,11 @@ import Blogs from './pages/Blogs/Blogs';
 import Home from './pages/Home/Home/Home';
 import Login from './pages/Login/Login/Login';
 import Register from './pages/Login/Register/Register';
-import ServiceDetail from './pages/ServiceDetail/ServiceDetail';
+import RequireAuth from './pages/Login/RequireAuth/RequireAuth';
 import Services from './pages/Services/Services';
 import Footer from './pages/Shared/Footer/Footer';
 import Header from './pages/Shared/Header/Header';
+import CheckOut from './pages/CheckOut/CheckOut';
 
 function App() {
   return (
@@ -19,7 +20,9 @@ function App() {
       <Route path='/home' element={<Home></Home>}></Route>
       <Route path='/services' element={<Services></Services>}></Route>
       <Route path='/service/:serviceId' element={
-      <ServiceDetail></ServiceDetail>
+      <RequireAuth>
+        <CheckOut></CheckOut>
+      </RequireAuth>
       }></Route>
       <Route path='/blogs' element={<Blogs></Blogs>}></Route>
       <Route path='/about' element={<About></About>}></Route>

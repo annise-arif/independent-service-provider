@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import auth from "../../../firebase.init";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import SocialLogin from "../SocialLogin/SocialLogin";
+import Loading from "../../Shared/Loading/Loading";
 
 const Register = () => {
   const emailRef = useRef('');
@@ -16,8 +17,11 @@ const Register = () => {
     user,
     loading,
     error,
-  ] = useCreateUserWithEmailAndPassword(auth);
-  // {sendEmailVerification: true}
+  ] = useCreateUserWithEmailAndPassword(auth, {sendEmailVerification: true});
+  
+  if(loading){
+    return <Loading></Loading>
+  }
 
   if(error){
     errorElement = <p className='text-danger'> Error: {error?.message}</p>  
