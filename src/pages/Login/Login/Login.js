@@ -44,7 +44,6 @@ const Login = () => {
     if(email && password){
       signInWithEmailAndPassword(email, password);
     }
-    console.log(email, password);
   }
 
   const resetPassword = async() =>{
