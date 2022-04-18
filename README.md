@@ -5,12 +5,13 @@
 
 Link :  
 
-### Used these materials
+### Used these technologies
 * React
 * React Bootstrap
 * React Router
 * React firebase hooks
 * used Firebase Hosting
+* react toastify
 
 #### Feature
 * google sign in system

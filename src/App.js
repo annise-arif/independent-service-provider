@@ -10,6 +10,7 @@ import Services from './pages/Services/Services';
 import Footer from './pages/Shared/Footer/Footer';
 import Header from './pages/Shared/Header/Header';
 import CheckOut from './pages/CheckOut/CheckOut';
+import NotFound from './pages/Shared/NotFound/NotFound';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
       }></Route>
       <Route path='/login' element={<Login></Login>}></Route>
       <Route path='/register' element={<Register></Register>}></Route>
+      <Route path='*' element={<NotFound></NotFound>}></Route>
 
     </Routes>
 
